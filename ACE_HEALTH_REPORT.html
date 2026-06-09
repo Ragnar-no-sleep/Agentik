@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ACE Health Report</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; background: #f4f4f9; color: #333; }
+    .card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem; }
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+    .metric { text-align: center; }
+    .metric-value { font-size: 1.5rem; font-weight: bold; color: #007bff; }
+    .lesson { padding: 0.75rem; border-left: 4px solid #ccc; margin-bottom: 0.5rem; background: #fafafa; }
+    .lesson.high { border-left-color: #dc3545; }
+    .lesson.medium { border-left-color: #ffc107; }
+    .lesson.low { border-left-color: #28a745; }
+    h1 { color: #2c3e50; }
+  </style>
+</head>
+<body>
+  <h1>ACE Workflow Health Report</h1>
+  <div class="card">
+    <p>Last Analysis: 09/06/2026 12:28:23</p>
+    <div class="metrics">
+      <div class="metric"><div class="metric-value">4</div>Total Lessons</div>
+      <div class="metric"><div class="metric-value">1</div>Gaps</div>
+      <div class="metric"><div class="metric-value">0</div>Errors</div>
+      <div class="metric"><div class="metric-value">12</div>Context Debt Score</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Detailed Findings</h2>
+    
+      <div class="lesson medium">
+        <strong>PATTERN</strong>: Repeated tool call detected: write_file was called 2 times with the same arguments.<br>
+        <small>Recommendation: Consider modularizing this action or checking if the agent is stuck in a loop.</small>
+      </div>
+    
+      <div class="lesson medium">
+        <strong>PATTERN</strong>: Repeated tool call detected: run_shell_command was called 2 times with the same arguments.<br>
+        <small>Recommendation: Consider modularizing this action or checking if the agent is stuck in a loop.</small>
+      </div>
+    
+      <div class="lesson medium">
+        <strong>PATTERN</strong>: Repeated tool call detected: run_shell_command was called 2 times with the same arguments.<br>
+        <small>Recommendation: Consider modularizing this action or checking if the agent is stuck in a loop.</small>
+      </div>
+    
+      <div class="lesson medium">
+        <strong>GAP</strong>: The agent consistently uses TypeScript ESNext modules but GEMINI.md doesn't specify this standard.<br>
+        <small>Recommendation: Update GEMINI.md to mandate ESNext modules and NodeNext module resolution.</small>
+      </div>
+    
+  </div>
+</body>
+</html>
+    
