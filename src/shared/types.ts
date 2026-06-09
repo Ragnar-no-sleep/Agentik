@@ -48,3 +48,13 @@ export const LessonSchema = z.object({
   severity: z.enum(['low', 'medium', 'high']),
 });
 export type Lesson = z.infer<typeof LessonSchema>;
+
+export interface HealthMetrics {
+  totalLessons: number;
+  gapCount: number;
+  errorCount: number;
+  patternCount: number;
+  decisionCount: number;
+  severityScore: number; // Weighted score
+  lastAnalysis: string;
+}

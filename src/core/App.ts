@@ -4,6 +4,7 @@ import { PatternDetector } from '../analysis/modules/PatternDetector.js';
 import { GapAnalyzer } from '../analysis/modules/GapAnalyzer.js';
 import { WorkspaceProvider } from '../persistence/WorkspaceProvider.js';
 import { MarkdownPersistenceAdapter } from '../persistence/MarkdownPersistenceAdapter.js';
+import { HealthDashboard } from '../persistence/HealthDashboard.js';
 import { ILLMProvider } from '../shared/llm.js';
 import path from 'node:path';
 
@@ -20,6 +21,7 @@ export class App {
     const provider = new FileSessionProvider(path.dirname(this.config.sessionPath));
     const workspace = new WorkspaceProvider(this.config.projectRoot);
     const persistence = new MarkdownPersistenceAdapter(this.config.projectRoot);
+    const dashboard = new HealthDashboard(this.config.projectRoot);
 
     const orchestrator = new AnalysisOrchestrator();
     orchestrator.registerModule(new PatternDetector());
@@ -36,7 +38,9 @@ export class App {
     if (lessons.length > 0) {
       await persistence.updateGeminiInstructions(lessons);
       await persistence.updateMemory(lessons);
+      const reportPath = await dashboard.generateReport(lessons);
       console.log(`[ACE] Knowledge base updated.`);
+      console.log(`[ACE] Health report generated: ${reportPath}`);
     } else {
       console.log(`[ACE] No significant lessons to persist.`);
     }
